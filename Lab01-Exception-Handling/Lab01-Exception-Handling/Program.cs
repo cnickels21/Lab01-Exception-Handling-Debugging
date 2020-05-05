@@ -11,7 +11,7 @@ namespace Lab01_Exception_Handling
             try
             {
                 StartSequence();
-            
+            }
             catch (Exception ex)
             {
                 Console.WriteLine("Oh no! Something went wrong: {0}", ex);
