@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Lab01_Exception_Handling
 {
@@ -43,9 +44,10 @@ namespace Lab01_Exception_Handling
                 // Variables to capture the return integers for displaying in console
                 int sum = GetSum(userDefinedArray);
                 int product = GetProduct(userDefinedArray, sum);
-
-                // This variable is for capturing a specific number for console display
+                decimal quotient = GetQuotient(product);
+                // These variables are for capturing a specific number for console display
                 int dividendOfProduct = product / sum;
+                decimal userDividendForQuotient = product / quotient;
 
                 string stringifiedArray = string.Join(",", userDefinedArray); // Variable to hold array as string for console display
 
@@ -53,6 +55,7 @@ namespace Lab01_Exception_Handling
                 Console.WriteLine("The numbers in the array are {0} ", stringifiedArray);
                 Console.WriteLine("Your sum is {0}", sum);
                 Console.WriteLine("{0} * {1} = {2}", sum, dividendOfProduct, product);
+                Console.WriteLine("{0} / {1} = {2}", product, userDividendForQuotient, quotient);
             }
             catch (FormatException fex)
             {
@@ -112,16 +115,34 @@ namespace Lab01_Exception_Handling
         {
             Console.WriteLine("Please elect a number between 1 and {0}", array.Length);
             int dealersChoice = int.Parse(Console.ReadLine());
+            int actualIndex = dealersChoice - 1;
 
             try
             {
-                int product = array[dealersChoice] * sum;
+                int product = array[actualIndex] * sum;
                 return product;
             }
             catch (IndexOutOfRangeException iex)
             {
                 Console.WriteLine("The product is out of range: {0}", iex);
                 throw;
+            }
+        }
+
+        static decimal GetQuotient(int product)
+        {
+            Console.WriteLine("Please enter a number to divide {0} by: ", product);
+            int dealersDividend = int.Parse(Console.ReadLine());
+
+            try
+            {
+                int quotient = product / dealersDividend;
+                return quotient;
+            }
+            catch (DivideByZeroException dex)
+            {
+                Console.WriteLine("Cannot divide by 0: {0}", dex);
+                return 0;
             }
         }
 
