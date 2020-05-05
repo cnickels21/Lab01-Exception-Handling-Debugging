@@ -39,11 +39,20 @@ namespace Lab01_Exception_Handling
 
                 // Subsequent methods are called here for the full number game
                 Populate(userDefinedArray);
+
+                // Variables to capture the return integers for displaying in console
+                int sum = GetSum(userDefinedArray);
+                int product = GetProduct(userDefinedArray, sum);
+
+                // This variable is for capturing a specific number for console display
+                int dividendOfProduct = product / sum;
+
                 string stringifiedArray = string.Join(",", userDefinedArray); // Variable to hold array as string for console display
 
                 Console.WriteLine("Your array size is : {0}", userDefinedArray.Length);
                 Console.WriteLine("The numbers in the array are {0} ", stringifiedArray);
-                Console.WriteLine("Your sum is {0}", GetSum(userDefinedArray));
+                Console.WriteLine("Your sum is {0}", sum);
+                Console.WriteLine("{0} * {1} = {2}", sum, dividendOfProduct, product);
             }
             catch (FormatException fex)
             {
@@ -80,13 +89,13 @@ namespace Lab01_Exception_Handling
                 {
                     sum += array[i];
                 }
-                ValidateSum(sum);
+                ValidateSum(sum);  // Method defined below for checking size of value
             }
-            catch (Exception ex)
+            catch (Exception ex)  // Exception is thrown if ValidateSum comes back as true
             {
                 Console.WriteLine("Value of {0} is too low: {1}", sum, ex);
             }
-
+            
             return sum;
         }
 
@@ -98,6 +107,23 @@ namespace Lab01_Exception_Handling
             
         }
 
+        // Product method defined here
+        static int GetProduct(int[] array, int sum)
+        {
+            Console.WriteLine("Please elect a number between 1 and {0}", array.Length);
+            int dealersChoice = int.Parse(Console.ReadLine());
+
+            try
+            {
+                int product = array[dealersChoice] * sum;
+                return product;
+            }
+            catch (IndexOutOfRangeException iex)
+            {
+                Console.WriteLine("The product is out of range: {0}", iex);
+                throw;
+            }
+        }
 
 
     }
