@@ -45,12 +45,15 @@ namespace Lab01_Exception_Handling
                 int sum = GetSum(userDefinedArray);
                 int product = GetProduct(userDefinedArray, sum);
                 decimal quotient = GetQuotient(product);
-                // These variables are for capturing a specific number for console display
+
+                // These variables are for capturing specific numbers for console display
                 int dividendOfProduct = product / sum;
                 decimal userDividendForQuotient = product / quotient;
 
-                string stringifiedArray = string.Join(",", userDefinedArray); // Variable to hold array as string for console display
+                // Variable to hold array as string for console display
+                string stringifiedArray = string.Join(",", userDefinedArray);
 
+                // Displaying all results after user prompts are done
                 Console.WriteLine("Your array size is : {0}", userDefinedArray.Length);
                 Console.WriteLine("The numbers in the array are {0} ", stringifiedArray);
                 Console.WriteLine("Your sum is {0}", sum);
@@ -129,6 +132,7 @@ namespace Lab01_Exception_Handling
             }
         }
 
+        // Quotient method defined
         static decimal GetQuotient(int product)
         {
             Console.WriteLine("Please enter a number to divide {0} by: ", product);
